@@ -7,15 +7,14 @@ class FirstScreen extends StatefulWidget {
   _FirstScreenState createState() => _FirstScreenState();
 }
 
-  final List<Widget> _pages = [
-    const Center(child: Text('You are in First Screen', style: TextStyle(fontSize: 24))),
-    const Center(child: Text('You are in Second Screen', style: TextStyle(fontSize: 24))),
-    const Center(child: Text('You are in Third Screen', style: TextStyle(fontSize: 24))),
-  ];
-
 class _FirstScreenState extends State<FirstScreen> {
   int _selectedIndex = 0;
 
+  final List<Widget> _pages = [
+    const Center(child: Text('You are in First Screen', style: TextStyle(fontSize: 24))),
+    const Center(child: Text('You are in Second Section', style: TextStyle(fontSize: 24))),
+    const Center(child: Text('You are in Third Section', style: TextStyle(fontSize: 24))),
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -39,17 +38,10 @@ class _FirstScreenState extends State<FirstScreen> {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.looks_one),
-              title: const Text('First Screen'),
-              onTap: () {
-                Navigator.pop(context); 
-              },
-            ),
-            ListTile(
               leading: const Icon(Icons.looks_two),
               title: const Text('Second Screen'),
               onTap: () {
-                Navigator.pushNamed(context, '/second');
+                Navigator.pushNamed(context, '/second', arguments: {'from': 'First Screen'});
               },
             ),
             ListTile(
@@ -62,43 +54,29 @@ class _FirstScreenState extends State<FirstScreen> {
           ],
         ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IndexedStack(
-              index: _selectedIndex,
-              children: _pages,
-            ),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     Navigator.pushNamed(context, '/second');
-            //   },
-            //   child: const Text('Go to Second Screen'),
-            // ),
-            // SizedBox(height: 10),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     Navigator.pushNamed(context, '/third');
-            //   },
-            //   child: const Text('Go to Third Screen'),
-            // ),
-          ],
-        ),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _pages,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/dynamic');
+        },
+        child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.looks_one),
-            label: 'First Screen',
+            label: 'First',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.looks_two),
-            label: 'Second Screen',
+            label: 'Second Section',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.looks_3),
-            label: 'Third Screen',
+            label: 'Third Section',
           ),
         ],
         currentIndex: _selectedIndex,

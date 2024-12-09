@@ -68,7 +68,7 @@ class _FirstScreenState extends State<FirstScreen> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.looks_one),
-            label: 'First',
+            label: 'First Section',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.looks_two),
